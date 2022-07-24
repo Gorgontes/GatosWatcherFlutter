@@ -66,7 +66,9 @@ class CatProvider extends ChangeNotifier {
     initCatProvider();
   }
   initCatProvider() {
-    http.get(Uri.parse(urlGatos)).then((value) {
+    http.get(Uri.parse(urlGatos), headers: {
+      'x-api-key': 'bda53789-d59e-46cd-9bc4-2936630fde39'
+    }).then((value) {
       final List<dynamic> res = convert.jsonDecode(value.body);
       _cats = res.map<CatModel>((gato) => CatModel.fromJson(gato)).toList();
       notifyListeners();
