@@ -60,8 +60,8 @@ class CatModel {
 class CatProvider extends ChangeNotifier {
   List<CatModel> _cats = [];
   String searchText = '';
-  Iterable<CatModel> get cats =>
-      _cats.where((element) => element.name.contains(searchText));
+  Iterable<CatModel> get cats => _cats.where((element) =>
+      element.name.toLowerCase().contains(searchText.toLowerCase()));
   CatProvider() {
     initCatProvider();
   }
