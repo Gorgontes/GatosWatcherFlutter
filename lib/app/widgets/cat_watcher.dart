@@ -12,6 +12,18 @@ class CatViewer extends StatefulWidget {
 }
 
 class _CatViewerState extends State<CatViewer> {
+  List<CatCard> get cartasGatos {
+    final catProvider = Provider.of<CatProvider>(context);
+    return catProvider.cats
+        .map((gato) => CatCard(
+              raza: gato.name,
+              origen: gato.origin,
+              imageUrl: gato.catImage?.url ?? '',
+              temperament: gato.temperament,
+            ))
+        .toList();
+  }
+
   @override
   Widget build(BuildContext context) {
     final catProvider = Provider.of<CatProvider>(context);
@@ -21,10 +33,10 @@ class _CatViewerState extends State<CatViewer> {
           child: Column(
         children: [
           const Text('Gatos Watcher'),
-          const Padding(
+          Padding(
             padding: EdgeInsets.all(20),
             child: TextField(
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 suffixIcon: Icon(Icons.search),
                 labelText: "Ingresa el raza del gato",
                 enabledBorder: OutlineInputBorder(
@@ -34,18 +46,16 @@ class _CatViewerState extends State<CatViewer> {
                   ),
                 ),
               ),
+              onChanged: (newText) {
+                catProvider.setSeartText(newText);
+              },
             ),
           ),
           Expanded(
             child: ListView.builder(
-              itemCount: 20,
+              itemCount: cartasGatos.length,
               itemBuilder: (context, index) {
-                return const CatCard(
-                  raza: 'g',
-                  origen: '',
-                  imageUrl: '',
-                  temperament: '',
-                );
+                return cartasGatos[index];
                 // return const Text('data');
               },
             ),
