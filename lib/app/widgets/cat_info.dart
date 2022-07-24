@@ -38,7 +38,11 @@ class CatInfo extends StatelessWidget {
           return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(("${ReCase(e.key).titleCase} :")),
+              Section(
+                header: "${ReCase(e.key).titleCase} :",
+                description: "",
+                hasDivider: false,
+              ),
               Padding(
                 padding: const EdgeInsets.only(left: 20),
                 child: Column(children: getDetalles(e.value)),
@@ -58,10 +62,12 @@ class CatInfo extends StatelessWidget {
 
 class Section extends StatelessWidget {
   final String description, header;
+  final bool hasDivider;
   const Section({
     Key? key,
-    required this.description,
     required this.header,
+    required this.description,
+    this.hasDivider = true,
   }) : super(key: key);
 
   @override
@@ -72,7 +78,8 @@ class Section extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.all(4),
         child: Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Expanded(
               flex: 2,
@@ -81,9 +88,29 @@ class Section extends StatelessWidget {
                 // style: const TextStyle(fontSize: ),
               ),
             ),
+            if (hasDivider)
+              Center(
+                child: Container(
+                  height: 30,
+                  width: 1,
+                  decoration: const BoxDecoration(
+                    color: Colors.grey,
+                  ),
+                ),
+              ),
+            // const VerticalDivider(
+            //   width: 20,
+            //   thickness: 10,
+            //   indent: 20,
+            //   endIndent: 0,
+            //   color: Colors.black,
+            // ),
             Expanded(
-              flex: 5,
-              child: Text(description),
+              flex: 3,
+              child: Text(
+                description,
+                textAlign: TextAlign.center,
+              ),
             ),
           ],
         ),
