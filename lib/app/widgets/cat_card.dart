@@ -39,7 +39,7 @@ class CatCard extends StatelessWidget {
                       placeholder:
                           const AssetImage('assets/images/gato3Blue.gif'),
                     )
-                  : const Text('no hay imagen BITCH'),
+                  : const Text('no hay imagen'),
             ),
             const SizedBox(height: 10),
             Row(
