@@ -28,7 +28,7 @@ class IntroWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Gatos Watcher"),
+        title: const Text("Galeria de Gatos"),
       ),
       body: Center(
         child: Column(

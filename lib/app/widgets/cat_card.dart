@@ -1,16 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gatos_viewer/app/providers/cat_provider.dart';
+import 'package:flutter_gatos_viewer/app/widgets/cat_info.dart';
 
 class CatCard extends StatelessWidget {
-  final String raza;
-  final String origen;
-  final String imageUrl;
-  final String temperament;
+  final CatModel catModel;
   const CatCard({
     Key? key,
-    required this.raza,
-    required this.origen,
-    required this.imageUrl,
-    required this.temperament,
+    required this.catModel,
   }) : super(key: key);
 
   @override
@@ -27,19 +23,19 @@ class CatCard extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(raza),
+                Text(catModel.name),
                 IconButton(
                   padding: const EdgeInsets.all(0),
-                  onPressed: () => masInfo(context),
+                  onPressed: () => masInfo(context, catModel),
                   icon: const Icon(Icons.more),
                   constraints: const BoxConstraints(minHeight: 20),
                 )
               ],
             ),
             Center(
-              child: imageUrl != ''
+              child: catModel.catImage?.url != null
                   ? FadeInImage(
-                      image: NetworkImage(imageUrl),
+                      image: NetworkImage(catModel.catImage!.url),
                       placeholder:
                           const AssetImage('assets/images/gato3Blue.gif'),
                     )
@@ -49,8 +45,8 @@ class CatCard extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(origen),
-                Text(temperament.split(',')[0]),
+                Text(catModel.origin),
+                Text(catModel.temperament.split(',')[0]),
               ],
             ),
           ],
@@ -59,11 +55,11 @@ class CatCard extends StatelessWidget {
     );
   }
 
-  void masInfo(context) {
+  void masInfo(context, CatModel cat) {
     showDialog(
         context: context,
         builder: (context) => AlertDialog(
-              content: Text("test"),
+              content: CatInfo(catModel: cat),
             ));
   }
 }

@@ -30,6 +30,7 @@ class CatImage {
 }
 
 class CatModel {
+  final Map<String, dynamic>? raw;
   final String altNames;
   final String name;
   final String origin;
@@ -37,6 +38,7 @@ class CatModel {
   final CatImage? catImage;
   CatModel({
     this.catImage,
+    this.raw,
     required this.altNames,
     required this.name,
     required this.origin,
@@ -50,6 +52,7 @@ class CatModel {
       name: gato['name'] ?? 'no encontrado',
       origin: gato['origin'] ?? 'no encontrado',
       temperament: gato['temperament'] ?? 'no encontrado',
+      raw: gato,
     );
   }
 }

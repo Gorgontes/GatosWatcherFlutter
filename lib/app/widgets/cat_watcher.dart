@@ -14,27 +14,20 @@ class CatViewer extends StatefulWidget {
 class _CatViewerState extends State<CatViewer> {
   List<CatCard> get cartasGatos {
     final catProvider = Provider.of<CatProvider>(context);
-    return catProvider.cats
-        .map((gato) => CatCard(
-              raza: gato.name,
-              origen: gato.origin,
-              imageUrl: gato.catImage?.url ?? '',
-              temperament: gato.temperament,
-            ))
-        .toList();
+    return catProvider.cats.map((gato) => CatCard(catModel: gato)).toList();
   }
 
   @override
   Widget build(BuildContext context) {
     final catProvider = Provider.of<CatProvider>(context);
     return Scaffold(
-      appBar: AppBar(title: const Text("Cat Viewer")),
+      appBar: AppBar(title: const Text("volver")),
       body: Center(
           child: Column(
         children: [
-          const Text('Gatos Watcher'),
+          const Text('Galeria de Gatos'),
           Padding(
-            padding: EdgeInsets.all(20),
+            padding: const EdgeInsets.all(20),
             child: TextField(
               decoration: const InputDecoration(
                 suffixIcon: Icon(Icons.search),
